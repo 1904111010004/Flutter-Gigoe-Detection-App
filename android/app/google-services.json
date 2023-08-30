@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "606095153942",
+    "project_id": "gigoe-detection-app",
+    "storage_bucket": "gigoe-detection-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606095153942:android:41d5fadd267fe6218b8e37",
+        "android_client_info": {
+          "package_name": "com.example.gigoe_detection_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606095153942-r9fe5pihtgus9snpa4vlb9niss02o20k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdnChZUh_6k8sPtMvxSDVWEkOHJaZXZDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606095153942-r9fe5pihtgus9snpa4vlb9niss02o20k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
