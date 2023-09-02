@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gigoe_detection_app/widget/bottom_nav_bar.dart';
 
-class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+class AddPhoto extends StatefulWidget {
+  const AddPhoto({super.key});
 
   @override
-  State<HistoryPage> createState() => _HistoryPageState();
+  State<AddPhoto> createState() => _AddPhotoState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
+class _AddPhotoState extends State<AddPhoto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +17,7 @@ class _HistoryPageState extends State<HistoryPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 100,
-        title: const Text("Daftar Riwayat Pasien"),
+        title: const Text("Tambah Foto"),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -34,9 +35,16 @@ class _HistoryPageState extends State<HistoryPage> {
             ),
           ),
         ),
-      ),
-      body: const Center(
-        child: Text('Konten Halaman Utama Anda'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (BuildContext context) => const BottomNavBar(),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

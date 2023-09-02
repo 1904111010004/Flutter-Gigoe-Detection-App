@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gigoe_detection_app/Authentication/auth.dart';
-import 'package:gigoe_detection_app/pages/register_page.dart';
+import 'package:gigoe_detection_app/authentication/auth.dart';
+import 'package:gigoe_detection_app/Pages/register_page.dart';
 import 'package:gigoe_detection_app/widget/bottom_nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
