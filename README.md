@@ -1,16 +1,19 @@
-# gigoe_detection_app
+# GIGOE DETECTION APP
 
-A new Flutter project.
+## Deskripsi
 
-## Getting Started
+Gigoe Detection App merupakan aplikasi pendeteksi gigi karies berbasis mobile yang dibangun menggunakan framework Flutter dan bahasa pemrograman Dart.
 
-This project is a starting point for a Flutter application.
+## Fitur Utama
 
-A few resources to get you started if this is your first Flutter project:
+- Pengenalan Objek
+- Analisi Objek
+- Antarmuka Pengguna yang Ramah
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Cara Penggunaan
+1. Unduh dan instal aplikasi Gigoe Detectiion dari link ini.
+2. Buka aplikasi Gigoe Detection di perangkat Anda.
+3. Pilih opsi untuk mengambil gambar baru atau memilih gambar dari galeri.
+4. Tunggu beberapa saat sementara aplikasi menganalisis gambar.
+5. Setelah proses selesai, aplikasi akan menampilkan hasil pengenalan objek beserta analisis tambahan (jika tersedia).
+6. Anda dapat mengulangi langkah 3 hingga 5 untuk mengenali objek dalam gambar lain.
