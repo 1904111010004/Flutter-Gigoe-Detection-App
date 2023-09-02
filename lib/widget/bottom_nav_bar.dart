@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gigoe_detection_app/pages/add_patient_page.dart';
-import 'package:gigoe_detection_app/pages/guide_page.dart';
-import 'package:gigoe_detection_app/pages/history_page.dart';
-import 'package:gigoe_detection_app/pages/home_page.dart';
-import 'package:gigoe_detection_app/pages/profile_page.dart';
+import 'package:gigoe_detection_app/Pages/add_patient_page.dart';
+import 'package:gigoe_detection_app/Pages/guide_page.dart';
+import 'package:gigoe_detection_app/Pages/history_page.dart';
+import 'package:gigoe_detection_app/Pages/home_page.dart';
+import 'package:gigoe_detection_app/Pages/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -15,7 +15,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBar extends State<BottomNavBar> {
-  int _currentIndex = 0;
+  int _currentIndex = 2;
 
   final List<Widget> _pages = [
     const HomePage(),
