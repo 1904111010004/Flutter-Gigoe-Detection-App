@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="gigoe_detection_app"
+        android:label="Gigoe Detection"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

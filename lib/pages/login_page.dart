@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gigoe_detection_app/authentication/auth.dart';
+import 'package:gigoe_detection_app/Firebase/auth.dart';
 import 'package:gigoe_detection_app/Pages/register_page.dart';
 import 'package:gigoe_detection_app/widget/bottom_nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,14 +48,13 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                const Center(
+                Center(
                   child: Text(
                     'MASUK',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: GoogleFonts.poppins(
+                        color: const Color(0xffffffff),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -69,10 +68,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: TextFormField(
                     controller: email,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Alamat Email',
+                      hintStyle: GoogleFonts.poppins(
+                          color: const Color(0xffC3C3C3),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                     ),
                   ),
                 ),
@@ -87,10 +90,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextFormField(
                     controller: password,
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Kata Sandi',
+                      hintStyle: GoogleFonts.poppins(
+                          color: const Color(0xffC3C3C3),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                     ),
                   ),
                 ),
@@ -181,31 +188,32 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Lanjutkan',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      style: GoogleFonts.poppins(
+                          color: const Color(0xffffffff),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
-                // const Text(
-                //   'Lupa kata sandi?',
-                //   style: TextStyle(color: Colors.white),
-                // ),
-                const SizedBox(height: 16),
                 RichText(
                   text: TextSpan(
                     children: [
-                      const TextSpan(
+                      TextSpan(
                         text: 'Belum mempunyai akun? ',
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.poppins(
+                            color: const Color(0xffffffff),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
                       TextSpan(
                         text: 'Daftar',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: GoogleFonts.poppins(
+                            color: const Color(0xffffffff),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.of(context).pushReplacement(

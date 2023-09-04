@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gigoe_detection_app/Pages/login_page.dart';
 import 'package:gigoe_detection_app/Pages/register_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -30,26 +31,24 @@ class WelcomePage extends StatelessWidget {
               width: 100,
               height: 100,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             // Deskripsi
-            const Text(
-              'Aplikasi perhitungan indeks karies gigi DMF-T.',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-              ),
+            Text(
+              'Aplikasi Perhitungan Karies Gigi',
+              style: GoogleFonts.poppins(
+                  color: const Color(0xffffffff),
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
-
             // Teks Selamat Datang
-            const Text(
+            Text(
               'Selamat Datang!',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: GoogleFonts.poppins(
+                  color: const Color(0xffffffff),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 40),
             // Tombol "Mulai"
@@ -71,11 +70,12 @@ class WelcomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'Mulai',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
+                style: GoogleFonts.poppins(
+                    color: const Color(0xffffffff),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
               ),
             ),
             const SizedBox(height: 20),
@@ -98,11 +98,12 @@ class WelcomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'Sudah mempunyai akun',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
+                style: GoogleFonts.poppins(
+                    color: const Color(0xff000000),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ],

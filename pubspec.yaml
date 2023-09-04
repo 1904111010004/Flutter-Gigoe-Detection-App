@@ -35,6 +35,8 @@ dependencies:
   firebase_auth: ^4.8.0
   firebase_core: ^2.15.1
   firebase_database: ^10.2.5
+  firebase_storage: ^11.2.6
+  fl_chart: ^0.63.0
   flutter:
     sdk: flutter
   google_fonts: ^5.1.0
@@ -68,6 +70,11 @@ flutter:
     - assets/images/slider1.png
     - assets/images/slider2.png
     - assets/images/slider3.png
+    - assets/images/gigi_depan.JPG
+    - assets/images/gigi_kanan.JPG
+    - assets/images/gigi_kiri.JPG
+    - assets/images/gigi_atas.JPG
+    - assets/images/gigi_bawah.JPG
   # An image asset can refer toeeee en one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
