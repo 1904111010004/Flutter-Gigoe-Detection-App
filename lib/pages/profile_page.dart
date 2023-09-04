@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -16,7 +17,13 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 100,
-        title: const Text("Profil Pengguna"),
+        title: Text(
+          "Profil Pengguna",
+          style: GoogleFonts.poppins(
+              color: const Color(0xffffffff),
+              fontSize: 20,
+              fontWeight: FontWeight.w500),
+        ),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -36,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
       body: const Center(
-        child: Text('Konten Halaman Utama Anda'),
+        child: Text('NO DATA!'),
       ),
     );
   }

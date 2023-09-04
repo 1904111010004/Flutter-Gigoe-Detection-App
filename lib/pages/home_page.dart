@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           const CustomAppBar(),
           CustomImgSlider(),
-          const CustomCharts()
+          const CustomCharts(),
         ],
       ),
     );

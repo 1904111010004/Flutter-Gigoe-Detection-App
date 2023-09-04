@@ -53,16 +53,6 @@ class CustomImgSlider extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            top: 400,
-            left: 0,
-            right: 0,
-            child: Container(
-              width: 300,
-              height: 200,
-              decoration: const BoxDecoration(color: Colors.white),
-            ),
-          ),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -44,21 +45,19 @@ class CustomAppBar extends StatelessWidget {
                     child: Center(
                       child: RichText(
                         // Custom Teks
-                        text: const TextSpan(
+                        text: TextSpan(
                           text: 'Halo, ',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white,
-                          ),
+                          style: GoogleFonts.poppins(
+                              color: const Color(0xffffffff),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400),
                           children: [
                             TextSpan(
                               text: 'Subhan Janura',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                              style: GoogleFonts.poppins(
+                                  color: const Color(0xffffffff),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -81,7 +80,7 @@ class CustomAppBar extends StatelessWidget {
                     right: 70,
                     child: Icon(
                       Icons.notifications_none_rounded,
-                      size: 40,
+                      size: 35,
                       color: Color(0xFFCBE4DE),
                     ),
                   ),

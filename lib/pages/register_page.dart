@@ -36,14 +36,13 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                const Center(
+                Center(
                   child: Text(
                     'DAFTAR AKUN',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: GoogleFonts.poppins(
+                        color: const Color(0xffffffff),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -57,10 +56,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   child: TextFormField(
                     controller: nama,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Nama Lengkap',
+                      hintStyle: GoogleFonts.poppins(
+                          color: const Color(0xffC3C3C3),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                     ),
                   ),
                 ),
@@ -74,10 +77,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   child: TextFormField(
                     controller: email,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Alamat Email',
+                      hintStyle: GoogleFonts.poppins(
+                          color: const Color(0xffC3C3C3),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                     ),
                   ),
                 ),
@@ -92,10 +99,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextFormField(
                     controller: password,
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Kata Sandi',
+                      hintStyle: GoogleFonts.poppins(
+                          color: const Color(0xffC3C3C3),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                     ),
                   ),
                 ),
@@ -197,9 +208,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Buat Akun',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      style: GoogleFonts.poppins(
+                          color: const Color(0xffffffff),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
@@ -207,75 +221,30 @@ class _RegisterPageState extends State<RegisterPage> {
                 RichText(
                   text: TextSpan(
                     children: [
-                      const TextSpan(
+                      TextSpan(
                         text: 'Sudah mempunyai akun? ',
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.poppins(
+                            color: const Color(0xffffffff),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                       ),
                       TextSpan(
-                          text: 'Masuk',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      const LoginPage(),
-                                ),
-                              );
-                            }),
-                    ],
-                  ),
-                ),
-                Container(
-                  // Garis pembatas
-                  height: 1,
-                  color: Colors.white,
-                  margin: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                Container(
-                  height: 50,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: const Color(0xFFFFFFFF),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => const LoginPage(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/icons/google_icon.png',
-                          height: 24,
-                          width: 24,
-                        ),
-                        const SizedBox(width: 10),
-                        const Text(
-                          'Lanjutkan dengan Google',
-                          style: TextStyle(
+                        text: 'Masuk',
+                        style: GoogleFonts.poppins(
+                            color: const Color(0xffffffff),
                             fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff2E4F4F),
-                          ),
-                        ),
-                      ],
-                    ),
+                            fontWeight: FontWeight.bold),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const LoginPage(),
+                              ),
+                            );
+                          },
+                      ),
+                    ],
                   ),
                 ),
               ],

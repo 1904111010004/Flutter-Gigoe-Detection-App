@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gigoe_detection_app/Pages/add_photo_page.dart';
+// import 'package:gigoe_detection_app/Pages/welcome_page.dart';
+import '../Widget/bottom_nav_bar.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -20,8 +21,8 @@ class _SplashPageState extends State<SplashPage> {
       () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            // builder: (BuildContext context) => const BottomNavBar(),
-            builder: (BuildContext context) => const AddPhoto(),
+            builder: (BuildContext context) => const BottomNavBar(),
+            // builder: (BuildContext context) => const WelcomePage(),
           ),
         );
       },
