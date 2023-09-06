@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gigoe_detection_app/Pages/login_page.dart';
-import 'package:gigoe_detection_app/Pages/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'login_page.dart';
+import 'register_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});

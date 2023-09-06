@@ -1,7 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
+import '../widgets/bottom_nav_bar.dart';
+
 // import 'package:gigoe_detection_app/Pages/welcome_page.dart';
-import '../Widget/bottom_nav_bar.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

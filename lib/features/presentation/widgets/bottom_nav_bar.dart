@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gigoe_detection_app/Pages/add_patient_page.dart';
-import 'package:gigoe_detection_app/Pages/guide_page.dart';
-import 'package:gigoe_detection_app/Pages/history_page.dart';
-import 'package:gigoe_detection_app/Pages/home_page.dart';
-import 'package:gigoe_detection_app/Pages/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../pages/add_patient_page.dart';
+import '../pages/guide_page.dart';
+import '../pages/history_page.dart';
+import '../pages/home_page.dart';
+import '../pages/profile_page.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

@@ -1,21 +1,34 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gigoe_detection_app/Pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+import '../../../Firebase/auth.dart';
+import '../widgets/bottom_nav_bar.dart';
+import 'register_page.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController nama = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
+  String? errorMessage = "";
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
+
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      await Auth().signInWithEmailAndPassword(
+          email: email.text.trim(), password: password.text.trim());
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 20),
                 Center(
                   child: Text(
-                    'DAFTAR AKUN',
+                    'MASUK',
                     style: GoogleFonts.poppins(
                         color: const Color(0xffffffff),
                         fontSize: 20,
@@ -47,27 +60,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                Container(
-                  height: 50,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: TextFormField(
-                    controller: nama,
-                    decoration: InputDecoration(
-                      hintText: 'Nama Lengkap',
-                      hintStyle: GoogleFonts.poppins(
-                          color: const Color(0xffC3C3C3),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 Container(
                   height: 50,
                   width: 300,
@@ -121,33 +113,22 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       try {
-                        UserCredential userCredential = await FirebaseAuth
-                            .instance
-                            .createUserWithEmailAndPassword(
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
                           email: email.text.trim(),
                           password: password.text.trim(),
                         );
-                        // Get the user's unique ID
-                        String userId = userCredential.user!.uid;
-                        // Create a document reference for the user
-                        DocumentReference userDocRef = FirebaseFirestore
-                            .instance
-                            .collection('users')
-                            .doc(userId);
-                        await userDocRef.set(
-                          {
-                            'name': nama.text.trim(),
-                            'email': email.text.trim(),
-                          },
-                        );
+                        // Authentication successful, navigate to the home page or perform any desired actions
                         // ignore: use_build_context_synchronously
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const LoginPage(),
+                                const BottomNavBar(),
                           ),
                         );
                       } catch (e) {
+                        setState(() {
+                          errorMessage = e.toString();
+                        });
                         showDialog(
                           context: context,
                           builder: (context) => Dialog(
@@ -169,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    'Data tidak boleh kosong atau data sudah terdaftar!',
+                                    'Alamat Email dan Kata Sandi yang dimasukkan tidak valid!',
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.poppins(
                                         color:
@@ -209,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     child: Text(
-                      'Buat Akun',
+                      'Lanjutkan',
                       style: GoogleFonts.poppins(
                           color: const Color(0xffffffff),
                           fontSize: 14,
@@ -222,14 +203,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Sudah mempunyai akun? ',
+                        text: 'Belum mempunyai akun? ',
                         style: GoogleFonts.poppins(
                             color: const Color(0xffffffff),
                             fontSize: 14,
                             fontWeight: FontWeight.w400),
                       ),
                       TextSpan(
-                        text: 'Masuk',
+                        text: 'Daftar',
                         style: GoogleFonts.poppins(
                             color: const Color(0xffffffff),
                             fontSize: 14,
@@ -239,7 +220,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const LoginPage(),
+                                    const RegisterPage(),
                               ),
                             );
                           },
