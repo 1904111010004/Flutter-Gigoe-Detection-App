@@ -44,7 +44,7 @@ class _AddPatientState extends State<AddPatient> {
         elevation: 0,
         toolbarHeight: 100,
         title: Text(
-          "Tambah Pasien",
+          "Tambah  Pasien",
           style: GoogleFonts.poppins(
               color: const Color(0xffffffff),
               fontSize: 20,
