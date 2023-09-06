@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:gigoe_detection_app/Pages/add_photo_page.dart';
@@ -22,7 +23,30 @@ class _AddPatientState extends State<AddPatient> {
   String _selectedDistrict = 'Baiturrahman';
   String _selectedProfession = 'Belum/Tidak Bekerja';
 
+  late DatabaseReference dbRef;
+
+  @override
+  void initState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child('data');
+  }
+
   get firestore => null;
+
+  Future<String?> _tambahpasien() async {
+    Map<String, String> students = {
+      'nik': _nikController.text.trim(),
+      'nama': _namaController.text.trim(),
+      'ttl': _lahirController.text.trim(),
+      'alamat': _selectedDistrict,
+      'gender': _selectedGender,
+      'pekerjaan': _selectedProfession,
+      'email': _emailController.text.trim(),
+      'nomor': _nomorController.text.trim(),
+    };
+
+    dbRef.child('${_nikController.text}').set(students);
+  }
 
   @override
   void dispose() {
@@ -97,13 +121,22 @@ class _AddPatientState extends State<AddPatient> {
                       50, () {
                     _resetControllers();
                   }),
-                  _buildSaveButton(
-                      // Tombol Simpan Data ke Database
-                      "Lanjutkan",
-                      const Color(0xff2E4F4F),
-                      130,
-                      50,
-                      () {}),
+                  MaterialButton(
+                    onPressed: () {
+                      _tambahpasien;
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const AddPhoto(),
+                        ),
+                      );
+                      setState(() {});
+                    },
+                    child: const Text('Insert Data'),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    minWidth: 100,
+                    height: 40,
+                  ),
                 ],
               ),
             ],
