@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gigoe_detection_app/Firebase/fetch_data_pasien.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -42,8 +43,8 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
         ),
       ),
-      body: const Center(
-        child: Text('NO DATA!'),
+      body: Center(
+        child: FetchDataResults(),
       ),
     );
   }

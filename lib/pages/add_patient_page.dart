@@ -28,12 +28,12 @@ class _AddPatientState extends State<AddPatient> {
   @override
   void initState() {
     super.initState();
-    dbRef = FirebaseDatabase.instance.ref().child('data');
+    dbRef = FirebaseDatabase.instance.ref().child('data_pasien');
   }
 
   get firestore => null;
 
-  Future<String?> _tambahpasien() async {
+  void _tambahpasien() {
     Map<String, String> students = {
       'nik': _nikController.text.trim(),
       'nama': _namaController.text.trim(),
@@ -123,15 +123,15 @@ class _AddPatientState extends State<AddPatient> {
                   }),
                   MaterialButton(
                     onPressed: () {
-                      _tambahpasien;
+                      _tambahpasien();
+                      setState(() {});
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (BuildContext context) => const AddPhoto(),
                         ),
                       );
-                      setState(() {});
                     },
-                    child: const Text('Insert Data'),
+                    child: const Text('Lanjutkan'),
                     color: Colors.blue,
                     textColor: Colors.white,
                     minWidth: 100,
