@@ -26,9 +26,15 @@ Future<void> setup() async {
 
   locator.registerFactory(() => ImgResponseBloc(
         locator(),
+        locator(),
+        locator(),
+        locator(),
+        locator(),
       ));
 
   // USE CASE
+
+  // Front
   locator.registerLazySingleton(
     () => CreateFrontImageClassification(locator()),
   );
@@ -36,20 +42,36 @@ Future<void> setup() async {
     () => FrontImageResponse(locator()),
   );
 
+  // Right
   locator.registerLazySingleton(
     () => CreateRightImageClassification(locator()),
   );
+  locator.registerLazySingleton(
+    () => RightImageResponse(locator()),
+  );
 
+  // Left
   locator.registerLazySingleton(
     () => CreateLeftImageClassification(locator()),
   );
+  locator.registerLazySingleton(
+    () => LeftImageResponse(locator()),
+  );
 
+  // Upper
   locator.registerLazySingleton(
     () => CreateUpperImageClassification(locator()),
   );
+  locator.registerLazySingleton(
+    () => UpperImageResponse(locator()),
+  );
 
+  // Lower
   locator.registerLazySingleton(
     () => CreateLowerImageClassification(locator()),
+  );
+  locator.registerLazySingleton(
+    () => LowerImageResponse(locator()),
   );
 
   // REPOSITORY INJECTION

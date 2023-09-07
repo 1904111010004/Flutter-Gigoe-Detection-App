@@ -7,11 +7,27 @@ sealed class ImgResponseEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnFrontImgResponse extends ImgResponseEvent {
-  final String img;
+class OnCombinedImgResponse extends ImgResponseEvent {
+  final String frontImage;
+  final String rightImage;
+  final String leftImage;
+  final String upperImage;
+  final String lowerImage;
 
-  const OnFrontImgResponse(this.img);
+  const OnCombinedImgResponse({
+    required this.frontImage,
+    required this.rightImage,
+    required this.leftImage,
+    required this.upperImage,
+    required this.lowerImage,
+  });
 
   @override
-  List<Object> get props => [img];
+  List<Object> get props => [
+        frontImage,
+        rightImage,
+        leftImage,
+        upperImage,
+        lowerImage,
+      ];
 }

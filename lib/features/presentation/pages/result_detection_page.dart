@@ -1,7 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gigoe_detection_app/features/presentation/bloc/img_response_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../domain/entities/prediction.dart';
+import '../bloc/classification_bloc.dart';
 
 class ResultDetectionPage extends StatefulWidget {
   const ResultDetectionPage({super.key});
@@ -11,15 +16,103 @@ class ResultDetectionPage extends StatefulWidget {
 }
 
 class _ResultDetectionPageState extends State<ResultDetectionPage> {
+  // Front
+  List<String> frontCaries = [];
+  List<String> frontMissing = [];
+  List<String> frontFilling = [];
+
+  // Right
+  List<String> rightCaries = [];
+  List<String> rightMissing = [];
+  List<String> rightFilling = [];
+
+  // Left
+  List<String> leftCaries = [];
+  List<String> leftMissing = [];
+  List<String> leftFilling = [];
+
+  // Upper
+  List<String> upperCaries = [];
+  List<String> upperMissing = [];
+  List<String> upperFilling = [];
+
+  // Lower
+  List<String> lowerCaries = [];
+  List<String> lowerMissing = [];
+  List<String> lowerFilling = [];
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+
+    List<String> filterData(
+      List<Prediction> predictions,
+      String predictionClass,
+    ) {
+      return predictions
+          .where((element) => element.predictionClass == predictionClass)
+          .map((e) => e.predictionClass)
+          .toList()
+          .cast<String>();
+    }
+
+    context.select<ClassificationBloc, void>((value) {
+      final state = value.state;
+
+      if (state is CombinedClassificationState) {
+        setState(() {
+          // Front
+          frontCaries = filterData(state.frontData.predictions!, "Karies");
+          frontMissing = filterData(state.frontData.predictions!, "Hilang");
+          frontFilling = filterData(state.frontData.predictions!, "Tambal");
+
+          // Right
+          rightCaries = filterData(state.rightData.predictions!, "Karies");
+          rightMissing = filterData(state.rightData.predictions!, "Hilang");
+          rightFilling = filterData(state.rightData.predictions!, "Tambal");
+
+          // Left
+          leftCaries = filterData(state.leftData.predictions!, "Karies");
+          leftMissing = filterData(state.leftData.predictions!, "Hilang");
+          leftFilling = filterData(state.leftData.predictions!, "Tambal");
+
+          // Upper
+          upperCaries = filterData(state.upperData.predictions!, "Karies");
+          upperMissing = filterData(state.upperData.predictions!, "Hilang");
+          upperFilling = filterData(state.upperData.predictions!, "Tambal");
+
+          // Lower
+          lowerCaries = filterData(state.lowerData.predictions!, "Karies");
+          lowerMissing = filterData(state.lowerData.predictions!, "Hilang");
+          lowerFilling = filterData(state.lowerData.predictions!, "Tambal");
+        });
+      }
+    });
+
+    int totalCaries = frontCaries.length +
+        rightCaries.length +
+        leftCaries.length +
+        upperCaries.length +
+        lowerCaries.length;
+
+    int totalMissing = frontMissing.length +
+        rightMissing.length +
+        leftMissing.length +
+        upperMissing.length +
+        lowerMissing.length;
+
+    int totalFilling = frontFilling.length +
+        rightFilling.length +
+        leftFilling.length +
+        upperFilling.length +
+        lowerFilling.length;
+
     return Scaffold(
       backgroundColor: const Color(0xffCBE4DE),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        toolbarHeight: 100,
+        toolbarHeight: 70,
         title: Text(
           "Hasil Deteksi",
           style: GoogleFonts.poppins(
@@ -52,12 +145,82 @@ class _ResultDetectionPageState extends State<ResultDetectionPage> {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: CarouselSlider(
-              items: const [
-                // ResultDetectionCard(),
-                // ResultDetectionCard(),
-                // ResultDetectionCard(),
-                // ResultDetectionCard(),
-                // ResultDetectionCard(),
+              items: [
+                BlocBuilder<ImgResponseBloc, ImgResponseState>(
+                  builder: (context, state) {
+                    if (state is CombinedImgResponseState) {
+                      return ResultDetectionCard(
+                        imageBytes: state.frontImgUint8List,
+                        caries: frontCaries.length,
+                        filledTooth: frontMissing.length,
+                        missingTooth: frontFilling.length,
+                        title: "Gigi Depan",
+                        subtitle: "PHOTO 1 OF 5",
+                      );
+                    }
+                    return const ResultDetectionLoading();
+                  },
+                ),
+                BlocBuilder<ImgResponseBloc, ImgResponseState>(
+                  builder: (context, state) {
+                    if (state is CombinedImgResponseState) {
+                      return ResultDetectionCard(
+                        imageBytes: state.rightImgUint8List,
+                        caries: rightCaries.length,
+                        filledTooth: rightMissing.length,
+                        missingTooth: rightFilling.length,
+                        title: "Gigi Kanan",
+                        subtitle: "PHOTO 2 OF 5",
+                      );
+                    }
+                    return const ResultDetectionLoading();
+                  },
+                ),
+                BlocBuilder<ImgResponseBloc, ImgResponseState>(
+                  builder: (context, state) {
+                    if (state is CombinedImgResponseState) {
+                      return ResultDetectionCard(
+                        imageBytes: state.leftImgUint8List,
+                        caries: leftCaries.length,
+                        filledTooth: leftMissing.length,
+                        missingTooth: leftFilling.length,
+                        title: "Gigi Kiri",
+                        subtitle: "PHOTO 3 OF 5",
+                      );
+                    }
+                    return const ResultDetectionLoading();
+                  },
+                ),
+                BlocBuilder<ImgResponseBloc, ImgResponseState>(
+                  builder: (context, state) {
+                    if (state is CombinedImgResponseState) {
+                      return ResultDetectionCard(
+                        imageBytes: state.upperImgUint8List,
+                        caries: upperCaries.length,
+                        filledTooth: upperMissing.length,
+                        missingTooth: upperFilling.length,
+                        title: "Gigi Atas",
+                        subtitle: "PHOTO 4 OF 5",
+                      );
+                    }
+                    return const ResultDetectionLoading();
+                  },
+                ),
+                BlocBuilder<ImgResponseBloc, ImgResponseState>(
+                  builder: (context, state) {
+                    if (state is CombinedImgResponseState) {
+                      return ResultDetectionCard(
+                        imageBytes: state.lowerImgUint8List,
+                        caries: lowerCaries.length,
+                        filledTooth: lowerMissing.length,
+                        missingTooth: lowerFilling.length,
+                        title: "Gigi Bawah",
+                        subtitle: "PHOTO 5 OF 5",
+                      );
+                    }
+                    return const ResultDetectionLoading();
+                  },
+                ),
               ],
               options: CarouselOptions(
                 height: height * 0.44,
@@ -72,16 +235,38 @@ class _ResultDetectionPageState extends State<ResultDetectionPage> {
           ),
           const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Container(
-              height: 180,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
+            padding: const EdgeInsets.symmetric(horizontal: 38),
+            child: ResultoverallConditionCard(
+              totalCaries: totalCaries,
+              totalMissing: totalMissing,
+              totalFilling: totalFilling,
+            ),
+          ),
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20, left: 38, right: 38),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                foregroundColor: const Color(0xffffffff),
+                backgroundColor: const Color(0xff0E8388),
+                minimumSize: const Size(0, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {},
+              child: Center(
+                child: Text(
+                  "Kembali",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -91,16 +276,21 @@ class _ResultDetectionPageState extends State<ResultDetectionPage> {
 class ResultDetectionCard extends StatelessWidget {
   const ResultDetectionCard({
     super.key,
-    this.cavity = 0,
+    this.caries = 0,
     this.missingTooth = 0,
     this.filledTooth = 0,
-    required this.resultImageCard,
+    required this.imageBytes,
+    required this.title,
+    required this.subtitle,
   });
 
-  final double cavity;
-  final double missingTooth;
-  final double filledTooth;
-  final Widget resultImageCard;
+  final int caries;
+  final int missingTooth;
+  final int filledTooth;
+  final Uint8List? imageBytes;
+
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +309,7 @@ class ResultDetectionCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Gigi Depan",
+                title,
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -127,13 +317,29 @@ class ResultDetectionCard extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                "PHOTO 1 OF 5",
+                subtitle,
                 style: GoogleFonts.poppins(),
               )
             ],
           ),
           const SizedBox(height: 10),
-          resultImageCard,
+          Container(
+            height: height * 0.22,
+            width: 300,
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: imageBytes != null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.memory(
+                      imageBytes!,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : const SizedBox(),
+          ),
           const SizedBox(height: 10),
           Text(
             "Kondisi Gigi",
@@ -178,7 +384,7 @@ class ResultDetectionCard extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    cavity.toStringAsFixed(0),
+                    caries.toStringAsFixed(0),
                     style: GoogleFonts.poppins(),
                   ),
                   Text(
@@ -199,34 +405,206 @@ class ResultDetectionCard extends StatelessWidget {
   }
 }
 
-class ResultImageCard extends StatelessWidget {
-  const ResultImageCard({
+class ResultoverallConditionCard extends StatelessWidget {
+  const ResultoverallConditionCard({
     super.key,
-    required this.height,
-    required this.imageBytes,
+    this.totalCaries,
+    this.totalMissing,
+    this.totalFilling,
   });
 
-  final double height;
-  final Uint8List? imageBytes;
+  final int? totalCaries;
+  final int? totalMissing;
+  final int? totalFilling;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height * 0.22,
-      width: 300,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.black12,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Kondisi keselurahan Gigi Pasien",
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Total Gigi Karies ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    "Total Gigi Hilang ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    "Total Gigi Tambal ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    ":  ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    ":  ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    ":  ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    totalCaries.toString(),
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    totalMissing.toString(),
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    totalFilling.toString(),
+                    style: GoogleFonts.poppins(),
+                  ),
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ResultDetectionLoading extends StatelessWidget {
+  const ResultDetectionLoading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
+    return Container(
+      width: 320,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: imageBytes != null
-          ? ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.memory(
-                imageBytes!,
-                fit: BoxFit.cover,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                "Gigi Depan",
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            )
-          : const SizedBox(),
+              const Spacer(),
+              Text(
+                "PHOTO 0 OF 0",
+                style: GoogleFonts.poppins(),
+              )
+            ],
+          ),
+          const SizedBox(height: 10),
+          Container(
+              height: height * 0.22,
+              width: 300,
+              decoration: BoxDecoration(
+                color: Colors.black12,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.black45,
+                ),
+              )),
+          const SizedBox(height: 10),
+          Text(
+            "Kondisi Gigi",
+            style: GoogleFonts.poppins(),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Gigi Karies ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    "Gigi Hilang ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    "Gigi Tambal ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    ":  ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    ":  ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    ":  ",
+                    style: GoogleFonts.poppins(),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "0",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    "0",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  Text(
+                    "0",
+                    style: GoogleFonts.poppins(),
+                  ),
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

@@ -17,7 +17,7 @@ abstract class RemoteDataSource {
   Future<Uint8List> imageLowerResponse(String imgLowerRes);
 }
 
-const baseApi = 'https://detect.roboflow.com/caries-k4k7c/5';
+const baseApi = 'https://detect.roboflow.com/caries-k4k7c/4';
 const apiKeys = 'o9jAVJnztawPlAP7eD7x';
 const jsonFormat = 'json';
 const imageFormat = 'image&labels=on&stroke=2';

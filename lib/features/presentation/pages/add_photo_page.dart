@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gigoe_detection_app/features/presentation/bloc/classification_bloc.dart';
 import 'package:gigoe_detection_app/features/presentation/pages/result_detection_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-import '../bloc/classification_bloc.dart';
 import '../bloc/img_response_bloc.dart';
 import '../widgets/bottom_nav_bar.dart';
 
@@ -18,6 +18,7 @@ class AddPhoto extends StatefulWidget {
 
 class _AddPhotoState extends State<AddPhoto> {
   late ImagePicker _imagePicker;
+
   final Map<String, String?> _imageFiles = {
     'Gigi Depan': null,
     'Gigi Kanan': null,
@@ -158,42 +159,29 @@ class _AddPhotoState extends State<AddPhoto> {
                       ),
                     ),
                     onPressed: () {
-                      context.read<ClassificationBloc>().add(
-                            OnFrontImageClassification(
-                                _imageFiles['Gigi Depan']!),
-                          );
                       context.read<ImgResponseBloc>().add(
-                            OnFrontImgResponse(_imageFiles['Gigi Depan']!),
-                          );
-                      context.read<ClassificationBloc>().add(
-                            OnRightClassification(
-                              _imageFiles['Gigi Kanan']!,
+                            OnCombinedImgResponse(
+                              frontImage: _imageFiles['Gigi Depan']!,
+                              rightImage: _imageFiles['Gigi Kanan']!,
+                              leftImage: _imageFiles['Gigi Kiri']!,
+                              upperImage: _imageFiles['Gigi Atas']!,
+                              lowerImage: _imageFiles['Gigi Bawah']!,
                             ),
                           );
-
-                      // context.read<ClassificationBloc>().add(
-                      //       OnLeftClassification(
-                      //         _imageFiles['Gigi Kiri']!,
-                      //       ),
-                      //     );
-
-                      // context.read<ClassificationBloc>().add(
-                      //       OnUpperClassification(
-                      //         _imageFiles['Gigi Atas']!,
-                      //       ),
-                      //     );
-
-                      // context.read<ClassificationBloc>().add(
-                      //       OnLowerClassification(
-                      //         _imageFiles['Gigi Bawah']!,
-                      //       ),
-                      //     );
+                      context.read<ClassificationBloc>().add(
+                            OnCombinedClassification(
+                              frontImage: _imageFiles['Gigi Depan']!,
+                              rightImage: _imageFiles['Gigi Kanan']!,
+                              leftImage: _imageFiles['Gigi Kiri']!,
+                              upperImage: _imageFiles['Gigi Atas']!,
+                              lowerImage: _imageFiles['Gigi Bawah']!,
+                            ),
+                          );
                     },
-                    child:
-                        BlocConsumer<ClassificationBloc, ClassificationState>(
+                    child: BlocConsumer<ImgResponseBloc, ImgResponseState>(
                       listener: (context, state) {
-                        if (state is FrontImageClassificationState) {
-                          Navigator.pushReplacement(
+                        if (state is CombinedImgResponseState) {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) {
@@ -204,7 +192,7 @@ class _AddPhotoState extends State<AddPhoto> {
                         }
                       },
                       builder: (context, state) {
-                        if (state is ClassificationLoading) {
+                        if (state is ImgResponseLoading) {
                           return const Center(
                             child:
                                 CircularProgressIndicator(color: Colors.white),

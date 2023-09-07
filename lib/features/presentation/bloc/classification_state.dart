@@ -11,56 +11,36 @@ final class ClassificationInitial extends ClassificationState {}
 
 final class ClassificationLoading extends ClassificationState {}
 
-final class CariesError extends ClassificationState {
+final class ClassificationError extends ClassificationState {
   final String message;
 
-  const CariesError(this.message);
+  const ClassificationError(this.message);
 
   @override
   List<Object> get props => [message];
 }
 
-final class FrontImageClassificationState extends ClassificationState {
-  final Caries data;
+class CombinedClassificationState extends ClassificationState {
+  final Caries frontData;
+  final Caries rightData;
+  final Caries leftData;
+  final Caries upperData;
+  final Caries lowerData;
 
-  const FrontImageClassificationState(this.data);
-
-  @override
-  List<Object> get props => [data];
-}
-
-final class RightImageClassificationState extends ClassificationState {
-  final Caries data;
-
-  const RightImageClassificationState(this.data);
-
-  @override
-  List<Object> get props => [data];
-}
-
-final class LeftImageClassificationState extends ClassificationState {
-  final Caries data;
-
-  const LeftImageClassificationState(this.data);
+  const CombinedClassificationState({
+    required this.frontData,
+    required this.rightData,
+    required this.leftData,
+    required this.upperData,
+    required this.lowerData,
+  });
 
   @override
-  List<Object> get props => [data];
-}
-
-final class UpperImageClassificationState extends ClassificationState {
-  final Caries data;
-
-  const UpperImageClassificationState(this.data);
-
-  @override
-  List<Object> get props => [data];
-}
-
-final class LowerImageClassificationState extends ClassificationState {
-  final Caries data;
-
-  const LowerImageClassificationState(this.data);
-
-  @override
-  List<Object> get props => [data];
+  List<Object> get props => [
+        frontData,
+        rightData,
+        leftData,
+        upperData,
+        lowerData,
+      ];
 }
